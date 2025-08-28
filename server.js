@@ -6,7 +6,6 @@ import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Read certs
 const options = {
     key: fs.readFileSync(path.join(__dirname, 'server.key')),
     cert: fs.readFileSync(path.join(__dirname, 'server.crt')),
@@ -14,7 +13,6 @@ const options = {
     ca: fs.readFileSync(path.join(__dirname, 'ca.crt'))
 };
 
-// Serve main.exe from GitHub
 https.createServer(options, (req, res) => {
     if (req.url === '/main.exe') {
         https.get('https://github.com/zemi-rl/installer/releases/download/release/main.exe', (exeRes) => {
