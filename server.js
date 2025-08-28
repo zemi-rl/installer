@@ -7,7 +7,6 @@ import fetch from 'node-fetch';
 const app = express();
 const certDir = '/app/certs';
 
-// Mutual TLS configuration
 const options = {
   key: fs.readFileSync(path.join(certDir, 'server.key')),
   cert: fs.readFileSync(path.join(certDir, 'server.crt')),
@@ -16,8 +15,7 @@ const options = {
   rejectUnauthorized: true
 };
 
-// Remote file URL
-const FILE_URL = process.env.FILE_URL || 'https://github.com/zemi-rl/download/releases/download/main/main.exe';
+const FILE_URL = 'https://github.com/zemi-rl/installer/releases/download/release/main.exe';
 
 app.get('/main.exe', async (req, res) => {
   if (!req.client.authorized) {
