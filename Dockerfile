@@ -1,16 +1,17 @@
-FROM node:18-alpine
+# Use Node.js LTS
+FROM node:20-bullseye
 
-RUN apk add --no-cache bash openssl
-
+# Set working directory
 WORKDIR /app
 
-COPY start.sh .
-COPY server.js .
-COPY package.json .
+# Copy all files into container
+COPY . .
 
-RUN npm install
+# Make start.sh executable
 RUN chmod +x start.sh
 
+# Expose HTTPS port
 EXPOSE 443
 
+# Start server
 CMD ["./start.sh"]
